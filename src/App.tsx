@@ -37,7 +37,7 @@ export default function App() {
 	return (
 		<div>
 			<GlobalProvider>
-				<p> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</p>
+				<p style={{color: "white"}}> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</p>
 				<Header />
 				<div className="container">
 					<Balance />
