@@ -1,6 +1,6 @@
 import { TransactionType, Actions } from '../interface';
 
-export default (state: { transactions: TransactionType[] }, action: Actions) => {
+export default function AppReducer(state: { transactions: TransactionType[] }, action: Actions)  {
 	switch (action.type) {
 		case 'DELETE_TRANSACTION':
 			return {

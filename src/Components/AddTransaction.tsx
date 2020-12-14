@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
-import { expenseTrackerErrorType } from '../interface';
 
 import { GlobalContext } from '../Context/GlobalState';
 
