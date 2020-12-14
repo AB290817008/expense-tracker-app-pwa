@@ -37,9 +37,9 @@ export default function App() {
 	return (
 		<div>
 			<GlobalProvider>
-				<p style={{color: "white"}}> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</p>
+				<h1 style={{color: "white"}}> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</h1>
 				<Header />
-				<p>Notifications: </p>
+				
 				<div className="container">
 					<Balance />
 					<IncomeExpenses />
