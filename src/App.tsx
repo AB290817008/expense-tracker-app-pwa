@@ -39,6 +39,7 @@ export default function App() {
 			<GlobalProvider>
 				<p style={{color: "white"}}> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</p>
 				<Header />
+				<p>Notifications: </p>
 				<div className="container">
 					<Balance />
 					<IncomeExpenses />
