@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Header } from './Components/Header';
+import { Balance } from './Components/Balance';
+import { IncomeExpenses } from './Components/IncomeExpenses';
+import { TransactionList } from './Components/TransactionList';
+import { AddTransaction } from './Components/AddTransaction';
+import { GlobalProvider } from './Context/GlobalState';
+import { initNotification } from './Services/firebaseService';
+import firebase from 'firebase';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	const [ notificationPerm, setNotificationPerm ] = React.useState('');
+
+	const messaging = firebase.messaging();
+	initNotification().then((perm) => {
+		if (perm === 'granted') {
+			setNotificationPerm('enabled');
+			messaging
+				.getToken()
+				.then((currentToken) => {
+					if (currentToken) {
+						console.log('TOKEN');
+						console.log(currentToken);
+					} else {
+						console.log('No Instance ID token available. Request permission to generate one.');
+					}
+				})
+				.catch((err) => {
+					console.log('An error occurred while retrieving token. ', err);
+				});
+		}
+		if (perm === 'denied') {
+			setNotificationPerm('disabled');
+		}
+	});
+	return (
+		<div>
+			<GlobalProvider>
+				<p> {notificationPerm ? 'Notifications: ' + notificationPerm : ''}</p>
+				<Header />
+				<div className="container">
+					<Balance />
+					<IncomeExpenses />
+					<TransactionList />
+					<AddTransaction />
+				</div>
+			</GlobalProvider>
+		</div>
+	);
 }
-
-export default App;
